@@ -1,22 +1,62 @@
 #include "header.h"
 
+/*
+ *	Function: matrix_rref
+ *	------------------------------
+ *	Gets matrix as input from user, then calculates and prints RREF(matrix)
+ */
 void matrix_rref() {
+
 	int rows, cols;
 	printf("How many rows in matrix 1?: ");
 	scanf("%i", &rows);
-	printf("How many columns in matrix 1?: ");
-	scanf("%i", &cols);
+	cols = rows + 1;
 
-	int ** arr = (int **) malloc(rows * sizeof(int *));
-	for(int i = 0; i < rows; i++) {
-		arr[i] = (int *) malloc(cols * sizeof(int));	
-	}
-
-	arr = input_matrix(rows, cols);
+	float** arr = input_matrix(rows, cols, 1);
 	
 	// TODO #4: Implement Logic Here
+	int n = rows;	
+	float c;
+	float X[n];
+	float sum = 0.0;
+	
+	// Create Upper Triangular matrix
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			if(i > j) {
+				c = arr[i][j] / arr[j][j];
+				for(int k = 0; k <= n; k++) {
+					arr[i][k] = arr[i][k] - (c* arr[j][k]);
+			
+				}
+			}
+		}
+	}
+
+	printf("Upper Triangular Matrix\n");
+	print_matrix(arr, rows, cols);
+
+	X[n] =  arr[n][n + 1] / arr[n][n];
+	
+	for(int i = n - 2; i >= 0; i--) {
+		sum = 0.0;
+		for(int j = i + 1; j < n; j++) {
+			sum = sum + arr[i][j] * X[j];
+		}
+		X[i] = (arr[i][n + 1] - sum) / arr[i][i];
+	}
+
+	printf("------New Matrix------\n");
+	print_matrix(arr, rows, cols);
+	return;
 }
 
+
+/*
+ *	Function: matrix_add
+ *	------------------------------
+ *	Gets two matrices as input from user, then calculates and prints the sum
+ */
 void matrix_add() {
 	
 	// Get number of rows and columns from user
@@ -27,9 +67,9 @@ void matrix_add() {
 	scanf("%i", &cols);
 	
 	// Allocate and read in matricies
-	int** arr1 = input_matrix(rows, cols);
-	int** arr2 = input_matrix(rows, cols);
-	int** new_arr = allocate_matrix(rows, cols);	
+	float** arr1 = input_matrix(rows, cols, 1);
+	float** arr2 = input_matrix(rows, cols, 2);
+	float** new_arr = allocate_matrix(rows, cols);	
 	
 	// Perform Add operation
 	for(int i = 0; i < rows; i++) {
@@ -39,9 +79,16 @@ void matrix_add() {
 	}
 	
 	// Print new matrix
+	printf("------New Matrix------\n");
 	print_matrix(new_arr, rows, cols);
 }
 
+
+/*
+ *	Function: matrix_sub
+ *	------------------------------
+ *	Gets two matrices as input from user, then calculates and prints the difference
+ */
 void matrix_sub() {
 	
 	// Get number of rows and columns from user
@@ -52,9 +99,9 @@ void matrix_sub() {
 	scanf("%i", &cols);
 	
 	// Allocate and read in matrices
-	int** arr1 = input_matrix(rows, cols);
-	int** arr2 = input_matrix(rows, cols);
-	int** new_arr = allocate_matrix(rows, cols);
+	float** arr1 = input_matrix(rows, cols, 1);
+	float** arr2 = input_matrix(rows, cols, 2);
+	float** new_arr = allocate_matrix(rows, cols);
 	
 	// Perform SUB operation
 	for(int i = 0; i < rows; i++) {
@@ -64,10 +111,17 @@ void matrix_sub() {
 	}
 	
 	// Prints new matrix
+	printf("------New Matrix------\n");
 	print_matrix(new_arr, rows, cols);
 	
 }
 
+
+/*
+ *	Function: matrix_multiply
+ *	------------------------------
+ *	Gets two matrices as input from user, then calculates and prints the dot product
+ */
 void matrix_multiply() {
 
 	// Get number of rows and columns from user
@@ -83,8 +137,8 @@ void matrix_multiply() {
 	scanf("%i", &cols2);
 
 	// Allocate and read in matrices
-	int** arr1 = input_matrix(rows1, cols1);
-	int** arr2 = input_matrix(rows2, cols2);
+	float** arr1 = input_matrix(rows1, cols1, 1);
+	float** arr2 = input_matrix(rows2, cols2, 2);
 	
 	// Check for valid dimensions for multiplication
 	if(cols1 != rows2) {
@@ -93,9 +147,9 @@ void matrix_multiply() {
 	}
 
 	// Allocate new array
-	int** new_arr = allocate_matrix(rows1, cols2);
+	float** new_arr = allocate_matrix(rows1, cols2);
 	
-	int sum = 0;
+	float sum = 0;
 	
 	for(int i = 0; i < rows1; i++) {
 		for(int j = 0; j < cols2; j++) {
@@ -107,6 +161,7 @@ void matrix_multiply() {
 		}
 	}
 
+	printf("------New Matrix------\n");
 	print_matrix(new_arr, rows1, cols2);
 
 }
@@ -118,23 +173,24 @@ void matrix_multiply() {
  *	
  *	rows: number of rows desired for the matrix
  *	columns: number of columns desired for the matrix
+ *	num: number of matrix, used for help with user instructions
  *
  *	returns: A 2D int array of size [rows][columns] which values created by user
  */
-int** input_matrix(int rows, int columns) {
+float** input_matrix(int rows, int columns, int num) {
 	
-	int** arr = allocate_matrix(rows, columns);
+	float** arr = allocate_matrix(rows, columns);
 	
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			printf("Enter value for (%i, %i): ", i, j);
-			scanf("%i", &arr[i][j]); 
+			printf("Enter value for matrix %i (%i, %i): ", num, i, j);
+			scanf("%f", &arr[i][j]); 
 		}
 	}
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			printf("%i ", arr[i][j]); 
+			printf("%f ", arr[i][j]); 
 		}
 		printf("\n");
 	}
@@ -152,10 +208,10 @@ int** input_matrix(int rows, int columns) {
  *
  *	returns: An int** of size [rows][columns]
  */
-int** allocate_matrix(int rows, int columns) {
-	int ** arr = (int **) malloc(rows * sizeof(int *));
+float** allocate_matrix(int rows, int columns) {
+	float ** arr = (float **) malloc(rows * sizeof(float *));
 	for(int i = 0; i < rows; i++) {
-		arr[i] = (int *) malloc(columns * sizeof(int));	
+		arr[i] = (float *) malloc(columns * sizeof(float));	
 	}
 	return arr;
 }
@@ -172,12 +228,10 @@ int** allocate_matrix(int rows, int columns) {
  *
  *	returns: A 2D int array of size [rows][columns] which values created by user
  */
-void print_matrix(int** arr, int rows, int columns) {
-	
-	printf("------New Matrix------\n");
+void print_matrix(float** arr, int rows, int columns) {
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			printf("%i ", arr[i][j]); 
+			printf("%f ", arr[i][j]); 
 		}
 		printf("\n");
 	}
