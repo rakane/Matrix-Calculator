@@ -1,0 +1,4 @@
+./a.out
+src/libmatrix.a
+src/matrix.o
+src/main.o
