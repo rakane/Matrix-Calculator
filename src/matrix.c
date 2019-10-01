@@ -197,10 +197,34 @@ void rref() {
 	printf("How many rows in matrix 1?: ");
 	scanf("%i", &rows);
 	cols = rows + 1;
-
+	
+	// Read in matrix from user
 	float** arr = input_matrix(rows, cols, 1);
 
-	// TODO: Implement RREF algorithm here
+	// Begin RREF
+	int lead = 0;
+	
+	while(lead < rows) {
+		float d, m;
+
+		for(int i = 0; i < rows; i++) {
+			// Divisor
+			d = arr[lead][lead];
+			// Multiplier	
+			m = arr[i][lead] / arr[lead][lead];
+			
+			for(int j = 0; j < cols; j++) {
+				if(i == lead) {
+					arr[i][j] = arr[i][j] / d;
+				} else {
+					arr[i][j] -= arr[lead][j] * m;
+				}
+			}
+		}
+
+		lead++;
+	}
+	// End RREF
 
 	// Print RREF matrix
 	printf("\n\n--------------RREF Matrix-------------\n");
@@ -213,15 +237,16 @@ void rref() {
  *	Gets matrix as input from user, then calculates the trace
  */
 void trace() {
-	
+		
 	int rows;
 	printf("How many rows in matrix 1?: ");
 	scanf("%i", &rows);
-
+	
 	float** arr = input_matrix(rows, rows, 1);
 	
-	float sum = 0.0;
 
+	// Calculate trace by summing all arr[i][i] values
+	float sum = 0.0;
 	for(int i = 0; i < rows; i++) {
 		sum += arr[i][i];
 	}
@@ -243,7 +268,8 @@ void transpose() {
 
 	float** arr = input_matrix(rows, rows, 1);
 	float** new_arr = allocate_matrix(rows, rows);
-
+	
+	// Calculate transpose arr[i][j] = arr[j][i]
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < rows; j++) {
 			new_arr[i][j] = arr[j][i];
@@ -317,7 +343,11 @@ float** allocate_matrix(int rows, int columns) {
 void print_matrix(float** arr, int rows, int columns) {
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			printf("%.2f   ", arr[i][j]);	
+			if(arr[i][j] == 0 || arr[i][j] == -0) {
+				printf("%.2f  ", 0.0);
+			} else {
+				printf("%.2f   ", arr[i][j]);	
+			}
 		}
 		printf("\n");
 	}
