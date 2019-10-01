@@ -12,7 +12,7 @@
 
 
 /*
- *	Function: matrix_add
+ *	Function: add
  *	------------------------------
  *	Gets two matrices as input from user, then calculates and prints the sum
  */
@@ -44,7 +44,7 @@ void add() {
 
 
 /*
- *	Function: matrix_sub
+ *	Function: subtract
  *	------------------------------
  *	Gets two matrices as input from user, then calculates and prints the difference
  */
@@ -77,7 +77,7 @@ void subtract() {
 
 
 /*
- *	Function: matrix_multiply
+ *	Function: multiply
  *	------------------------------
  *	Gets two matrices as input from user, then calculates and prints the dot product
  */
@@ -127,7 +127,7 @@ void multiply() {
 
 
 /*
- *	Function: matrix_elimination
+ *	Function: gaussian_elimination
  *	------------------------------
  *	Gets matrix as input from user, then uses Gaussian Elimination to solve
  */
@@ -187,7 +187,7 @@ void gaussian_elimination() {
 
 
 /*
- *	Function: matrix_rref
+ *	Function: rref
  *	------------------------------
  *	Gets matrix as input from user, then reduces matrix to rref if possible
  */
@@ -207,7 +207,11 @@ void rref() {
 	print_matrix(arr, rows, cols);
 }
 
-
+/*
+ *	Function: trace
+ *	------------------------------
+ *	Gets matrix as input from user, then calculates the trace
+ */
 void trace() {
 	
 	int rows;
@@ -227,6 +231,11 @@ void trace() {
 	return;
 }
 
+/*
+ *	Function: transpose
+ *	------------------------------
+ *	Gets matrix as input from user, then calculates its transpose
+ */
 void transpose() {
 	int rows;
 	printf("How many rows in matrix 1?: ");
@@ -314,8 +323,3 @@ void print_matrix(float** arr, int rows, int columns) {
 	}
 
 }
-
-
-
-
-
