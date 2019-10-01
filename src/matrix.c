@@ -13,41 +13,49 @@ void matrix_rref() {
 	cols = rows + 1;
 
 	float** arr = input_matrix(rows, cols, 1);
-	
-	// TODO #4: Implement Logic Here
-	int n = rows;	
+
+	// Gauss Jordan Elimination
+	int n = rows - 1;
+	int i, j, k;	
 	float c;
 	float X[n];
 	float sum = 0.0;
 	
 	// Create Upper Triangular matrix
-	for(int i = 0; i < n; i++) {
-		for(int j = 0; j < n; j++) {
+	for(j = 0; j <= n; j++) {
+		for(i = 0; i <= n; i++) {
 			if(i > j) {
 				c = arr[i][j] / arr[j][j];
-				for(int k = 0; k <= n; k++) {
-					arr[i][k] = arr[i][k] - (c* arr[j][k]);
-			
+				for(k = 0; k <= n + 1; k++) {
+					arr[i][k] -= (c * arr[j][k]);
 				}
 			}
 		}
 	}
-
-	printf("Upper Triangular Matrix\n");
+	
+	// Print Upper Triangular matrix for debugging
+	printf("\n\n--------Upper Triangular Matrix--------\n");
 	print_matrix(arr, rows, cols);
-
+	
+	
+	// Back Substitution
 	X[n] =  arr[n][n + 1] / arr[n][n];
 	
-	for(int i = n - 2; i >= 0; i--) {
+	for(i = n - 1; i >= 0; i--) {
 		sum = 0.0;
-		for(int j = i + 1; j < n; j++) {
+		for(j = i + 1; j <= n; j++) {
 			sum = sum + arr[i][j] * X[j];
 		}
 		X[i] = (arr[i][n + 1] - sum) / arr[i][i];
 	}
-
-	printf("------New Matrix------\n");
-	print_matrix(arr, rows, cols);
+	// End Gauss Elimination	
+	
+	// Print solutions
+	printf("\n\n----------------Solution----------------\n");
+	for(i = 0; i <= n; i++) {
+		printf("X[%i]: %.2f\n", i, X[i]);
+	}
+	
 	return;
 }
 
@@ -187,13 +195,9 @@ float** input_matrix(int rows, int columns, int num) {
 			scanf("%f", &arr[i][j]); 
 		}
 	}
-
-	for(int i = 0; i < rows; i++) {
-		for(int j = 0; j < columns; j++) {
-			printf("%f ", arr[i][j]); 
-		}
-		printf("\n");
-	}
+	
+	printf("\n-------------Input Matrix-------------\n");
+	print_matrix(arr, rows, columns);
 
 	return arr;
 }
@@ -231,7 +235,7 @@ float** allocate_matrix(int rows, int columns) {
 void print_matrix(float** arr, int rows, int columns) {
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
-			printf("%f ", arr[i][j]); 
+			printf("%.2f   ", arr[i][j]);	
 		}
 		printf("\n");
 	}
