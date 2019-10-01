@@ -1,11 +1,137 @@
+
+/* 
+ * Matrix Calculator Library 
+ * Author: Ryan Kane
+ *	
+ * Library includes function for each matrix operation, 
+ * as well as helper functions for inputting and 
+ * allocating the matrices
+ */
+
 #include "header.h"
 
+
 /*
- *	Function: matrix_rref
+ *	Function: matrix_add
  *	------------------------------
- *	Gets matrix as input from user, then calculates and prints RREF(matrix)
+ *	Gets two matrices as input from user, then calculates and prints the sum
  */
-void matrix_rref() {
+void add() {
+	
+	// Get number of rows and columns from user
+	int rows, cols;
+	printf("How many rows in each matrix?: ");
+	scanf("%i", &rows);
+	printf("How many columns each matrix?: ");
+	scanf("%i", &cols);
+	
+	// Allocate and read in matricies
+	float** arr1 = input_matrix(rows, cols, 1);
+	float** arr2 = input_matrix(rows, cols, 2);
+	float** new_arr = allocate_matrix(rows, cols);	
+	
+	// Perform Add operation
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < cols; j++) {
+			new_arr[i][j] = arr1[i][j] + arr2[i][j];
+		}
+	}
+	
+	// Print new matrix
+	printf("------New Matrix------\n");
+	print_matrix(new_arr, rows, cols);
+}
+
+
+/*
+ *	Function: matrix_sub
+ *	------------------------------
+ *	Gets two matrices as input from user, then calculates and prints the difference
+ */
+void subtract() {
+	
+	// Get number of rows and columns from user
+	int rows, cols;
+	printf("How many rows in each matrix?: ");
+	scanf("%i", &rows);
+	printf("How many columns in each matrix?: ");
+	scanf("%i", &cols);
+	
+	// Allocate and read in matrices
+	float** arr1 = input_matrix(rows, cols, 1);
+	float** arr2 = input_matrix(rows, cols, 2);
+	float** new_arr = allocate_matrix(rows, cols);
+	
+	// Perform SUB operation
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < cols; j++) {
+			new_arr[i][j] = arr1[i][j] - arr2[i][j];
+		}
+	}
+	
+	// Prints new matrix
+	printf("------New Matrix------\n");
+	print_matrix(new_arr, rows, cols);
+	
+}
+
+
+/*
+ *	Function: matrix_multiply
+ *	------------------------------
+ *	Gets two matrices as input from user, then calculates and prints the dot product
+ */
+void multiply() {
+
+	// Get number of rows and columns from user
+	int rows1, cols1, rows2, cols2;
+	printf("How many rows in matrix 1?: ");
+	scanf("%i", &rows1);
+	printf("How many columns in matrix 1?: ");
+	scanf("%i", &cols1);
+	
+	printf("How many rows in matrix 2?: ");
+	scanf("%i", &rows2);
+	printf("How many columns in matrix 2?: ");
+	scanf("%i", &cols2);
+
+	// Allocate and read in matrices
+	float** arr1 = input_matrix(rows1, cols1, 1);
+	float** arr2 = input_matrix(rows2, cols2, 2);
+	
+	// Check for valid dimensions for multiplication
+	if(cols1 != rows2) {
+		printf("Invalid matrix dimensions");
+		return;
+	}
+
+	// Allocate new array
+	float** new_arr = allocate_matrix(rows1, cols2);
+	
+	float sum = 0;
+	
+	for(int i = 0; i < rows1; i++) {
+		for(int j = 0; j < cols2; j++) {
+			sum = 0;
+			for(int k = 0; k < cols1; k++) {
+				sum = sum + (arr1[i][k] * arr2[k][j]);
+			}
+			new_arr[i][j] = sum;
+		}
+	}
+
+	printf("------New Matrix------\n");
+	print_matrix(new_arr, rows1, cols2);
+
+}
+
+
+/*
+ *	Function: matrix_elimination
+ *	------------------------------
+ *	Gets matrix as input from user, then uses Gaussian Elimination to solve
+ */
+void gaussian_elimination() {
 
 	int rows, cols;
 	printf("How many rows in matrix 1?: ");
@@ -61,118 +187,65 @@ void matrix_rref() {
 
 
 /*
- *	Function: matrix_add
+ *	Function: matrix_rref
  *	------------------------------
- *	Gets two matrices as input from user, then calculates and prints the sum
+ *	Gets matrix as input from user, then reduces matrix to rref if possible
  */
-void matrix_add() {
-	
-	// Get number of rows and columns from user
+void rref() {
+
 	int rows, cols;
-	printf("How many rows in each matrix?: ");
-	scanf("%i", &rows);
-	printf("How many columns each matrix?: ");
-	scanf("%i", &cols);
-	
-	// Allocate and read in matricies
-	float** arr1 = input_matrix(rows, cols, 1);
-	float** arr2 = input_matrix(rows, cols, 2);
-	float** new_arr = allocate_matrix(rows, cols);	
-	
-	// Perform Add operation
-	for(int i = 0; i < rows; i++) {
-		for(int j = 0; j < cols; j++) {
-			new_arr[i][j] = arr1[i][j] + arr2[i][j];
-		}
-	}
-	
-	// Print new matrix
-	printf("------New Matrix------\n");
-	print_matrix(new_arr, rows, cols);
-}
-
-
-/*
- *	Function: matrix_sub
- *	------------------------------
- *	Gets two matrices as input from user, then calculates and prints the difference
- */
-void matrix_sub() {
-	
-	// Get number of rows and columns from user
-	int rows, cols;
-	printf("How many rows in each matrix?: ");
-	scanf("%i", &rows);
-	printf("How many columns in each matrix?: ");
-	scanf("%i", &cols);
-	
-	// Allocate and read in matrices
-	float** arr1 = input_matrix(rows, cols, 1);
-	float** arr2 = input_matrix(rows, cols, 2);
-	float** new_arr = allocate_matrix(rows, cols);
-	
-	// Perform SUB operation
-	for(int i = 0; i < rows; i++) {
-		for(int j = 0; j < cols; j++) {
-			new_arr[i][j] = arr1[i][j] - arr2[i][j];
-		}
-	}
-	
-	// Prints new matrix
-	printf("------New Matrix------\n");
-	print_matrix(new_arr, rows, cols);
-	
-}
-
-
-/*
- *	Function: matrix_multiply
- *	------------------------------
- *	Gets two matrices as input from user, then calculates and prints the dot product
- */
-void matrix_multiply() {
-
-	// Get number of rows and columns from user
-	int rows1, cols1, rows2, cols2;
 	printf("How many rows in matrix 1?: ");
-	scanf("%i", &rows1);
-	printf("How many columns in matrix 1?: ");
-	scanf("%i", &cols1);
-	
-	printf("How many rows in matrix 2?: ");
-	scanf("%i", &rows2);
-	printf("How many columns in matrix 2?: ");
-	scanf("%i", &cols2);
+	scanf("%i", &rows);
+	cols = rows + 1;
 
-	// Allocate and read in matrices
-	float** arr1 = input_matrix(rows1, cols1, 1);
-	float** arr2 = input_matrix(rows2, cols2, 2);
+	float** arr = input_matrix(rows, cols, 1);
+
+	// TODO: Implement RREF algorithm here
+
+	// Print RREF matrix
+	printf("\n\n--------------RREF Matrix-------------\n");
+	print_matrix(arr, rows, cols);
+}
+
+
+void trace() {
 	
-	// Check for valid dimensions for multiplication
-	if(cols1 != rows2) {
-		printf("Invalid matrix dimensions");
-		return;
+	int rows;
+	printf("How many rows in matrix 1?: ");
+	scanf("%i", &rows);
+
+	float** arr = input_matrix(rows, rows, 1);
+	
+	float sum = 0.0;
+
+	for(int i = 0; i < rows; i++) {
+		sum += arr[i][i];
 	}
+	
+	printf("\n\n Trace: %f\n\n", sum);
 
-	// Allocate new array
-	float** new_arr = allocate_matrix(rows1, cols2);
-	
-	float sum = 0;
-	
-	for(int i = 0; i < rows1; i++) {
-		for(int j = 0; j < cols2; j++) {
-			sum = 0;
-			for(int k = 0; k < cols1; k++) {
-				sum = sum + (arr1[i][k] * arr2[k][j]);
-			}
-			new_arr[i][j] = sum;
+	return;
+}
+
+void transpose() {
+	int rows;
+	printf("How many rows in matrix 1?: ");
+	scanf("%i", &rows);
+
+	float** arr = input_matrix(rows, rows, 1);
+	float** new_arr = allocate_matrix(rows, rows);
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < rows; j++) {
+			new_arr[i][j] = arr[j][i];
 		}
 	}
 
-	printf("------New Matrix------\n");
-	print_matrix(new_arr, rows1, cols2);
+	printf("\n\n-----------Transposed Matrix---------\n");
+	print_matrix(new_arr, rows, rows);
 
 }
+
 
 /*
  *	Function: input_matrix
