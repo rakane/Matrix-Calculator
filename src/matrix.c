@@ -193,14 +193,16 @@ void gaussian_elimination() {
  */
 void rref() {
 
-	int rows, cols;
+	int rows, cols, zero_rows;
+	zero_rows = 0;
 	printf("How many rows in matrix 1?: ");
 	scanf("%i", &rows);
 	cols = rows + 1;
 	
 	// Read in matrix from user
 	float** arr = input_matrix(rows, cols, 1);
-
+	zero_rows = check_zero_row(arr, rows, cols);
+	rows -= zero_rows;
 	// Begin RREF
 	int lead = 0;
 	
@@ -228,7 +230,7 @@ void rref() {
 
 	// Print RREF matrix
 	printf("\n\n--------------RREF Matrix-------------\n");
-	print_matrix(arr, rows, cols);
+	print_matrix(arr, rows + zero_rows, cols);
 }
 
 /*
@@ -251,7 +253,7 @@ void trace() {
 		sum += arr[i][i];
 	}
 	
-	printf("\n\n Trace: %f\n\n", sum);
+	printf("\n\nTrace: %f\n\n", sum);
 
 	return;
 }
@@ -279,6 +281,92 @@ void transpose() {
 	printf("\n\n-----------Transposed Matrix---------\n");
 	print_matrix(new_arr, rows, rows);
 
+}
+
+void rank() {
+    
+	int rows, cols, zero_rows;
+	zero_rows = 0;
+	printf("How many rows in matrix 1?: ");
+	scanf("%i", &rows);
+	cols = rows + 1;
+	
+	// Read in matrix from user
+	float** arr = input_matrix(rows, cols, 1);
+	zero_rows = check_zero_row(arr, rows, cols);
+	rows -= zero_rows;
+	// Begin RREF
+	int lead = 0;
+	
+	while(lead < rows) {
+		float d, m;
+
+		for(int i = 0; i < rows; i++) {
+			// Divisor
+			d = arr[lead][lead];
+			// Multiplier	
+			m = arr[i][lead] / arr[lead][lead];
+			
+			for(int j = 0; j < cols; j++) {
+				if(i == lead) {
+					arr[i][j] = arr[i][j] / d;
+				} else {
+					arr[i][j] -= arr[lead][j] * m;
+				}
+			}
+		}
+
+		lead++;
+	}
+	// End RREF
+	// Print RREF matrix
+	printf("\n\n--------------RREF Matrix-------------\n");
+	print_matrix(arr, rows + zero_rows, cols);
+
+
+
+	int rank = 0;
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < cols; j++) {
+			if(arr[i][j] != 0) {
+				rank++;
+				break;
+			}
+		printf("i: %i, rank: %i\n\n", i, rank);	
+		}
+	}
+	
+	printf("\n\nRank: %i\n\n", rank);
+	return;
+}
+
+int check_zero_row(float** arr, int rows, int columns) {
+	
+	int num = 0;
+	int rows_shifted = 0;
+
+	for(int i = 0; i < rows - rows_shifted; i++) {
+		for(int j = 0; j < columns; j++) {
+			if(arr[i][j] != 0) {
+				break;
+			}
+			if(j == columns - 1) {
+				num++;
+				
+				float temp;
+				for(int k = 0; k <	columns; k++) {
+					temp = arr[i][k];
+					arr[i][k] = arr[rows - rows_shifted - 1][k];
+					arr[rows - rows_shifted - 1][k] = temp;
+				}	
+				
+				rows_shifted++;
+			}	
+		} 
+	}
+
+	return num;
 }
 
 

@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
 	printf("5.)\tRREF\n");
 	printf("6.)\tTrace\n");
 	printf("7.)\tTranspose\n");
+	printf("8.)\tRank\n");
 
 		
 	int answer;
@@ -32,6 +33,8 @@ int main(int argc, char* argv[]) {
 			trace(); break;
 		case 7:
 			transpose(); break;
+		case 8:
+			rank(); break;
 		default:
 			printf("No operation choosen");
 		}
