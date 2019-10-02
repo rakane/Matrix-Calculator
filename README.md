@@ -14,5 +14,6 @@
 8. Rank
 
 ## TODO Functionality
-1. Determinant
-2. Inverse
+1. Minors/Cofactors
+2. Determinant
+3. Inverse
