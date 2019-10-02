@@ -8,10 +8,11 @@
 2. Subtraction
 3. Multiplication
 4. Gaussian Elimination
-5. Trace
-6. Transpose
+5. RREF
+6. Trace
+7. Transpose
+8. Rank
 
 ## TODO Functionality
-1. RREF
-2. Determinant
-3. Rank
+1. Determinant
+2. Inverse
