@@ -1,113 +1,126 @@
 #include "header.h"
 
 int main(int argc, char* argv[]) {
+ 	int loop = 1;
 	
-	printf("------Matrix Calculator------\n");
+	while(loop)
+	{
+		printf("------Matrix Calculator------\n");
 
-	printf("1.)\tAddition\n");
-	printf("2.)\tSubtraction\n");
-	printf("3.)\tMultiplication\n");	
-	printf("4.)\tGaussian Elimination\n");
-	printf("5.)\tRREF\n");
-	printf("6.)\tTrace\n");
-	printf("7.)\tTranspose\n");
-	printf("8.)\tRank\n");
+		printf("1.)\tAddition\n");
+		printf("2.)\tSubtraction\n");
+		printf("3.)\tMultiplication\n");	
+		printf("4.)\tGaussian Elimination\n");
+		printf("5.)\tRREF\n");
+		printf("6.)\tTrace\n");
+		printf("7.)\tTranspose\n");
+		printf("8.)\tRank\n");
 
 	
-	float** arr1, **arr2, **new_arr;
-	float* X;
-	int answer, rows1, columns1, rows2, columns2, num;
-	printf("Enter corresponding number to choose which operation: ");
-	scanf("%i", &answer);
+		float** arr1, **arr2, **new_arr;
+		float* X;
+		int answer, rows1, columns1, rows2, columns2, num;
+		printf("Enter corresponding number to choose which operation: ");
+		scanf("%i", &answer);
 	
-	switch(answer) {
-		case 1:
-			rows1 = get_rows();
-			columns1 = get_columns();
-			arr1 = input_matrix(rows1, columns1, 1);
-			arr2 = input_matrix(rows1, columns1, 2);
-			new_arr = add(arr1, arr2, rows1, columns1);
-			printf("-------------Solution-----------\n");
-			print_matrix(new_arr, rows1, columns1);
-			break;
-		case 2:
-			rows1 = get_rows();
-			columns1 = get_columns();
-			arr1 = input_matrix(rows1, columns1, 1);
-			arr2 = input_matrix(rows1, columns1, 2);
-			new_arr = subtract(arr1, arr2, rows1, columns1);
-			printf("-------------Solution-----------\n");
-			print_matrix(new_arr, rows1, columns1);
-			break;
-		case 3:
-			rows1 = get_rows();
-			columns1 = get_columns();
-			arr1 = input_matrix(rows1, columns1, 1);
-			rows2 = get_rows();
-			columns2 = get_columns();
-			arr2 = input_matrix(rows2, columns2, 2);
-			new_arr = multiply(arr1, arr2, rows1, columns1, rows2, columns2);
-			printf("-------------Solution-----------\n");
-			print_matrix(new_arr, rows1, columns2);
-			break;
-		case 4:
-			rows1 = get_rows();
-			columns1 = rows1 + 1;
-			X = malloc(sizeof(float) * rows1);
-			arr1 = input_matrix(rows1, columns1, 1);
-			X = gaussian_elimination(arr1, rows1, columns1);
-			// Print solutions
-			printf("\n\n----------------Solution----------------\n");
-			for(int i = 0; i < rows1; i++) {
-				printf("X[%i]: %.2f\n", i, X[i]);
+		switch(answer) {
+			case 1:
+				rows1 = get_rows(1);
+				columns1 = get_columns(1);
+				arr1 = input_matrix(rows1, columns1, 1);
+				arr2 = input_matrix(rows1, columns1, 2);
+				new_arr = add(arr1, arr2, rows1, columns1);
+				printf("-------------Solution-----------\n");
+				print_matrix(new_arr, rows1, columns1);
+				break;
+			case 2:
+				rows1 = get_rows(1);
+				columns1 = get_columns(1);
+				arr1 = input_matrix(rows1, columns1, 1);
+				arr2 = input_matrix(rows1, columns1, 2);
+				new_arr = subtract(arr1, arr2, rows1, columns1);
+				printf("-------------Solution-----------\n");
+				print_matrix(new_arr, rows1, columns1);
+				break;
+			case 3:
+				rows1 = get_rows(1);
+				columns1 = get_columns(1);
+				arr1 = input_matrix(rows1, columns1, 1);
+				rows2 = get_rows(2);
+				columns2 = get_columns(2);
+				arr2 = input_matrix(rows2, columns2, 2);
+				new_arr = multiply(arr1, arr2, rows1, columns1, rows2, columns2);
+				printf("-------------Solution-----------\n");
+				print_matrix(new_arr, rows1, columns2);
+				break;
+			case 4:
+				rows1 = get_rows(1);
+				columns1 = rows1 + 1;
+				X = malloc(sizeof(float) * rows1);
+				arr1 = input_matrix(rows1, columns1, 1);
+				X = gaussian_elimination(arr1, rows1, columns1);
+				// Print solutions
+				printf("\n\n----------------Solution----------------\n");
+				for(int i = 0; i < rows1; i++) {
+					printf("X[%i]: %.2f\n", i, X[i]);
+				}
+				break;
+			case 5:
+				rows1 = get_rows(1);
+				columns1 = rows1 + 1;
+				arr1 = input_matrix(rows1, columns1, 1);
+				new_arr = rref(arr1, rows1, columns1);
+				// Print RREF matrix
+				printf("\n\n--------------RREF Matrix-------------\n");
+				print_matrix(new_arr, rows1, columns1);
+				break;
+			case 6:
+				rows1 = get_rows(1);
+				columns1 = rows1;
+				arr1 = input_matrix(rows1, columns1, 1);
+				num = trace(arr1, rows1, columns1);
+		   		printf("\n\nTrace: %i\n", num);	
+				break;
+			case 7:
+				rows1 = get_rows(1);
+				columns1 = rows1;
+				arr1 = input_matrix(rows1, columns1, 1);
+				new_arr = transpose(arr1, rows1);
+				printf("\n\n-----------Transposed Matrix---------\n");
+				print_matrix(new_arr, rows1, rows1);
+				break;
+			case 8:
+				rows1 = get_rows(1);
+				columns1 = rows1 + 1;
+				arr1 = input_matrix(rows1, columns1, 1);
+				num = rank(arr1, rows1, columns1);
+				printf("\n\nRank: %i\n\n", num);
+				break;
+			default:
+				printf("No operation choosen");
 			}
-			break;
-		case 5:
-			rows1 = get_rows();
-			columns1 = rows1 + 1;
-			arr1 = input_matrix(rows1, columns1, 1);
-			new_arr = rref(arr1, rows1, columns1);
-			// Print RREF matrix
-			printf("\n\n--------------RREF Matrix-------------\n");
-			print_matrix(new_arr, rows1, columns1);
-			break;
-		case 6:
-			rows1 = get_rows();
-			columns1 = rows1;
-			arr1 = input_matrix(rows1, columns1, 1);
-			num = trace(arr1, rows1, columns1);
-		   	printf("\n\nTrace: %i\n", num);	
-			break;
-		case 7:
-			rows1 = get_rows();
-			columns1 = rows1;
-			arr1 = input_matrix(rows1, columns1, 1);
-			new_arr = transpose(arr1, rows1);
-			printf("\n\n-----------Transposed Matrix---------\n");
-			print_matrix(new_arr, rows1, rows1);
-			break;
-		case 8:
-			rows1 = get_rows();
-			columns1 = rows1 + 1;
-			arr1 = input_matrix(rows1, columns1, 1);
-			num = rank(arr1, rows1, columns1);
-			printf("\n\nRank: %i\n\n", num);
-			break;
-		default:
-			printf("No operation choosen");
+
+		// Ask user if they want to run again
+		printf("Start another operation? (1 for yes, 0 for no): ");
+		scanf("%i", &loop);
+		while(loop != 1 && loop != 0) {
+			printf("Start another operation? (1 for yes, 0 for no): ");
+			scanf("%i", &loop);
 		}
+	}
+
 }
 
-int get_rows() {
+int get_rows(int num) {
 	int num_rows;	
-	printf("Enter number of rows in matrix: ");
+	printf("Enter number of rows in matrix %i: ", num);
 	scanf("%i", &num_rows);
 	return num_rows;
 }
 
-int get_columns() {
+int get_columns(int num) {
 	int num_cols;	
-	printf("Enter number of columns in matrix: ");
+	printf("Enter number of columns in matrix %i: ", num);
 	scanf("%i", &num_cols);
 	return num_cols;
 }
