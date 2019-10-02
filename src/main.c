@@ -3,10 +3,9 @@
 int main(int argc, char* argv[]) {
  	int loop = 1;
 	
-	while(loop)
-	{
-		printf("------Matrix Calculator------\n");
+	while(loop) {
 
+		printf("------Matrix Calculator------\n");
 		printf("1.)\tAddition\n");
 		printf("2.)\tSubtraction\n");
 		printf("3.)\tMultiplication\n");	
@@ -50,6 +49,5 @@ int main(int argc, char* argv[]) {
 			scanf("%i", &loop);
 		}
 	}
-
 }
 

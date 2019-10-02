@@ -1,3 +1,12 @@
+/* 
+ * Matrix Driver Library 
+ * Author: Ryan Kane
+ *	
+ * Library includes function for each matrix operation, 
+ * that correctly inputs matrices from user, calls opreation, 
+ * and prints return solution
+ */
+
 #include "header.h"
 
 float** arr1, **arr2, **new_arr;
@@ -5,7 +14,12 @@ float* X;
 int rows1, columns1, rows2, columns2, num;
 
 
-
+/*
+ *	Function: add_driver
+ *	------------------------------
+ *	Gets two matrices as input from user, then calls add function,
+ *	then prints matrix returned
+ */
 void add_driver()
 {
 	rows1 = get_rows(1);
@@ -17,6 +31,12 @@ void add_driver()
 	print_matrix(new_arr, rows1, columns1);
 }
 
+/*
+ *	Function: subtract_driver
+ *	------------------------------
+ *	Gets two matrices as input from user, then calls subtract function,
+ *	then prints matrix returned
+ */
 void subtract_driver()
 {
 	rows1 = get_rows(1);
@@ -28,6 +48,12 @@ void subtract_driver()
 	print_matrix(new_arr, rows1, columns1);
 }
 
+/*
+ *	Function: multiply_driver
+ *	------------------------------
+ *	Gets two matrices as input from user, then calls multiply function,
+ *	then prints matrix returned
+ */
 void multiply_driver() 
 {
 	rows1 = get_rows(1);
@@ -42,6 +68,12 @@ void multiply_driver()
 
 }
 
+/*
+ *	Function: gaussian_elimination_driver
+ *	------------------------------
+ *	Gets matrix as input from user, then calls gaussian_elimination function,
+ *	then prints solution vector returned
+ */
 void gaussian_elimination_driver() 
 {
 	rows1 = get_rows(1);
@@ -57,6 +89,12 @@ void gaussian_elimination_driver()
 	}
 }
 
+/*
+ *	Function: rref_driver
+ *	------------------------------
+ *	Gets matrix as input from user, then calls rref function,
+ *	then prints matrix returned
+ */
 void rref_driver()
 {
 	rows1 = get_rows(1);
@@ -69,7 +107,14 @@ void rref_driver()
 	print_matrix(new_arr, rows1, columns1);
 }
 
-void trace_driver() {
+/*
+ *	Function: trace_driver
+ *	------------------------------
+ *	Gets matrix as input from user, then calls trace function,
+ *	then prints value returned
+ */
+void trace_driver()
+{
 	rows1 = get_rows(1);
 	columns1 = rows1;
 	arr1 = input_matrix(rows1, columns1, 1);
@@ -77,6 +122,12 @@ void trace_driver() {
 	printf("\n\nTrace: %i\n", num);	
 }
 
+/*
+ *	Function: transpose_driver
+ *	------------------------------
+ *	Gets matrix as input from user, then calls transpose function,
+ *	then prints matrix returned
+ */
 void transpose_driver() {
 		rows1 = get_rows(1);
 		columns1 = rows1;
@@ -86,6 +137,12 @@ void transpose_driver() {
 		print_matrix(new_arr, rows1, rows1);
 }
 
+/*
+ *	Function: rank_driver
+ *	------------------------------
+ *	Gets matrix as input from user, then calls rank function,
+ *	then prints value returned
+ */
 void rank_driver() {
 	rows1 = get_rows(1);
 	columns1 = rows1 + 1;
@@ -95,6 +152,12 @@ void rank_driver() {
 }
 
 
+/* Function: get_rows()
+ * 	------------------------------
+ * 	Gets number of rows for matrix num
+ *
+ * 	return: number of rows in the matrix
+ */
 int get_rows(int num) {
 	int num_rows;	
 	printf("Enter number of rows in matrix %i: ", num);
@@ -102,13 +165,18 @@ int get_rows(int num) {
 	return num_rows;
 }
 
+/* Function: get_columnss()
+ * 	------------------------------
+ * 	Gets number of columns for matrix num from user
+ *
+ * 	return: number of columns in the matrix
+ */
 int get_columns(int num) {
 	int num_cols;	
 	printf("Enter number of columns in matrix %i: ", num);
 	scanf("%i", &num_cols);
 	return num_cols;
 }
-
 
 /*
  *	Function: input_matrix
@@ -180,4 +248,3 @@ void print_matrix(float** arr, int rows, int columns) {
 	}
 	printf("\n");
 }
-
