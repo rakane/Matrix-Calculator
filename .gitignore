@@ -1,4 +1,6 @@
 a.out
+src/libmatrixdriver.a
 src/libmatrix.a
 src/matrix.o
+src/matrixdriver.o
 src/main.o

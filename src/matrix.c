@@ -199,7 +199,13 @@ float** transpose(float** arr, int rows)
 
 int rank(float** arr1, int rows, int cols) 
 {    	
+
 	float** arr = rref(arr1, rows, cols);
+	
+	// Print RREF matrix
+	printf("\n\n--------------RREF Matrix-------------\n");
+	print_matrix(arr, rows, cols);
+
 	int rank = 0;
 
 	for(int i = 0; i < rows; i++) {
