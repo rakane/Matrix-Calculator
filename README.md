@@ -17,3 +17,8 @@
 1. Minors/Cofactors
 2. Determinant
 3. Inverse
+
+## To Run:
+1. Git clone or download this repo
+2. cd into the top level directory, and run "make"
+3. Then run "./calculator" to run
