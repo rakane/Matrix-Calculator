@@ -1,6 +1,8 @@
-a.out
+calculator
+check
 src/libmatrixdriver.a
 src/libmatrix.a
 src/matrix.o
 src/matrixdriver.o
 src/main.o
+test/check_matrix.o
