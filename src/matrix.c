@@ -109,8 +109,8 @@ float* gaussian_elimination(float** arr, int rows, int cols)
 	}
 	
 	// Print Upper Triangular matrix for debugging
-	printf("\n\n--------Upper Triangular Matrix--------\n");
-	print_matrix(arr, rows + zero_rows, cols);
+	// printf("\n\n--------Upper Triangular Matrix--------\n");
+	// print_matrix(arr, rows + zero_rows, cols);
 		
 	// Back Substitution
 	X[n] =  arr[n][n + 1] / arr[n][n];
@@ -203,9 +203,8 @@ int rank(float** arr1, int rows, int cols)
 	float** arr = rref(arr1, rows, cols);
 	
 	// Print RREF matrix
-	printf("\n\n--------------RREF Matrix-------------\n");
-	print_matrix(arr, rows, cols);
-
+	//printf("\n\n--------------RREF Matrix-------------\n");
+	//print_matrix(arr, rows, cols);
 	int rank = 0;
 
 	for(int i = 0; i < rows; i++) {
