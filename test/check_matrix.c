@@ -335,8 +335,6 @@ START_TEST(rank_test2)
 	ck_assert(answer == correct_answer);
 } END_TEST
 
-
-
 Suite * test_suite(void)
 {
 	Suite *s;
@@ -394,7 +392,7 @@ int compare_matrix(float** arr1, float** arr2, int rows, int columns)
 int compare_solutions(float* x1, float* x2, int rows) 
 {
 	for(int i = 0; i < rows; i++) {
-		if(x1[i] != x2[i]) {
+		if(abs(x1[i] - x2[i]) > .0099) {
 			return 0;
 		}
 	}
