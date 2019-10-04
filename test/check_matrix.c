@@ -335,6 +335,62 @@ START_TEST(rank_test2)
 	ck_assert(answer == correct_answer);
 } END_TEST
 
+START_TEST(det_test1)
+{
+	float** arr = allocate_matrix(2, 2);
+	float correct_answer = 170;
+	arr[0][0] = 10.0;
+	arr[0][1] = 20.0;
+	arr[1][0] = -10.0;
+	arr[1][1] = -3.0;
+	float answer = det(arr, 2, 2);
+	ck_assert(answer == correct_answer);
+} END_TEST
+
+START_TEST(det_test2)
+{
+	float** arr = allocate_matrix(3, 3);
+	float correct_answer = 178.0;
+	arr[0][0] = 4.0;
+	arr[0][1] = 8.0;
+	arr[0][2] = 6.0;
+	arr[1][0] = -1.0;
+	arr[1][1] = -3.0;
+	arr[1][2] = 5.0;
+	arr[2][0] = 20.0;
+	arr[2][1] = 31.0;
+	arr[2][2] = 44.0;
+	float answer = det(arr, 3, 3);
+	ck_assert(answer == correct_answer);
+} END_TEST
+
+
+
+START_TEST(det_test3)
+{
+	float** arr = allocate_matrix(4, 4);
+	float correct_answer = -435872.0;
+	arr[0][0] = 10.0;
+	arr[0][1] = 2.0;
+	arr[0][2] = 3.0;
+	arr[0][3] = 4.0;
+	arr[1][0] = -11.0;
+	arr[1][1] = -6.0;
+	arr[1][2] = 71.0;
+	arr[1][3] = 8.0;
+	arr[2][0] = 23.0;
+	arr[2][1] = 3.0;
+	arr[2][2] = 111.0;
+	arr[2][3] = 12.0;
+	arr[3][0] = 13.0;
+	arr[3][1] = 40.0;
+	arr[3][2] = 15.0;
+	arr[3][3] = 16.0;
+	float answer = det(arr, 4, 4);
+	ck_assert(answer == correct_answer);
+} END_TEST
+
+
 Suite * test_suite(void)
 {
 	Suite *s;
@@ -357,6 +413,9 @@ Suite * test_suite(void)
 	tcase_add_test(tc_core, transpose_test2);
 	tcase_add_test(tc_core, rank_test1);
 	tcase_add_test(tc_core, rank_test2);
+	tcase_add_test(tc_core, det_test1);
+	tcase_add_test(tc_core, det_test2);
+	tcase_add_test(tc_core, det_test3);
 
 	suite_add_tcase(s, tc_core);
 	return s;

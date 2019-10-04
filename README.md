@@ -12,11 +12,10 @@
 6. Trace
 7. Transpose
 8. Rank
+9. Determinant
 
 ## TODO Functionality
-1. Minors/Cofactors
-2. Determinant
-3. Inverse
+1. Inverse
 
 ## To Run:
 1. Git clone or download this repo

@@ -14,7 +14,8 @@ int main(int argc, char* argv[]) {
 		printf("6.)\tTrace\n");
 		printf("7.)\tTranspose\n");
 		printf("8.)\tRank\n");
-
+		printf("9.)\tDeterminant\n");
+	
 	
 		int answer;		
 		printf("Enter corresponding number to choose which operation: ");
@@ -37,6 +38,8 @@ int main(int argc, char* argv[]) {
 				transpose_driver();	break;
 			case 8:
 				rank_driver(); break;
+			case 9:
+				det_driver(); break;
 			default:
 				printf("No operation choosen");
 			}

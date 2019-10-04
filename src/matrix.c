@@ -219,6 +219,41 @@ int rank(float** arr1, int rows, int cols)
 	return rank;
 }
 
+float det(float** arr, int rows, int columns)
+{
+	float** minor = allocate_matrix(rows, columns);
+	float determinant = 0;
+	int c1, c2;
+	int sign = 1;
+
+	if(rows == 2) {
+		determinant = (arr[0][0] * arr[1][1]) - (arr[0][1] * arr [1][0]);	
+		return determinant;
+	} else {
+		for(int i = 0; i < rows; i++) {
+				c1 = 0;
+				c2 = 0;
+			for(int j = 0; j < columns; j++) {
+				for(int k = 0; k < rows; k++) {
+					if(j != 0 && k != i) {
+						minor[c1][c2] = arr[j][k];
+						c2++;
+						if(c2 > rows - 2) {
+							c1++;
+							c2 = 0;
+						}
+					}
+				}
+			}
+			determinant += (sign * (arr[0][i] * det(minor, rows - 1, rows - 1)));
+			sign = -1 * sign;
+		}
+	}
+	return determinant;
+}
+
+
+
 int check_zero_row(float** arr, int rows, int columns) {
 	
 	int num = 0;

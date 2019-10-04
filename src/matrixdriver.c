@@ -12,7 +12,7 @@
 float** arr1, **arr2, **new_arr;
 float* X;
 int rows1, columns1, rows2, columns2, num;
-
+float n;
 
 /*
  *	Function: add_driver
@@ -150,6 +150,15 @@ void rank_driver() {
 	num = rank(arr1, rows1, columns1);
 	printf("\n\nRank: %i\n\n", num);
 }
+
+void det_driver() {
+	rows1 = get_rows(1);
+	columns1 = rows1;
+	arr1 = input_matrix(rows1, columns1, 1);
+	n = det(arr1, rows1, columns1);
+	printf("\n\nDeterminant: %.2f\n\n", n);
+}
+
 
 
 /* Function: get_rows()
