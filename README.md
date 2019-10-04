@@ -15,7 +15,8 @@
 9. Determinant
 
 ## TODO Functionality
-1. Inverse
+1. Adjoint
+2. Inverse
 
 ## To Run:
 1. Git clone or download this repo
