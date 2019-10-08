@@ -364,8 +364,6 @@ START_TEST(det_test2)
 	ck_assert(answer == correct_answer);
 } END_TEST
 
-
-
 START_TEST(det_test3)
 {
 	float** arr = allocate_matrix(4, 4);
@@ -390,15 +388,15 @@ START_TEST(det_test3)
 	ck_assert(answer == correct_answer);
 } END_TEST
 
-
 Suite * test_suite(void)
 {
 	Suite *s;
 	TCase *tc_core;
 	s = suite_create("Basic");
 	tc_core = tcase_create("Core");
-	tcase_add_test(tc_core, subtract_test1);
-	tcase_add_test(tc_core, subtract_test2);
+	
+	tcase_add_test(tc_core, add_test1);
+	tcase_add_test(tc_core, add_test2);
 	tcase_add_test(tc_core, subtract_test1);
 	tcase_add_test(tc_core, subtract_test2);
 	tcase_add_test(tc_core, multiply_test1);
