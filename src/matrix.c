@@ -1,4 +1,3 @@
-
 /* 
  * Matrix Calculator Library 
  * Author: Ryan Kane
@@ -9,6 +8,7 @@
  */
 
 #include "header.h"
+
 
 /*
  *	Function: add
@@ -28,6 +28,7 @@ float** add(float** arr1, float** arr2, int rows, int cols)
 	return new_arr;
 }
 
+
 /*
  *	Function: subtract
  *	------------------------------
@@ -45,6 +46,7 @@ float** subtract(float** arr1, float** arr2, int rows, int cols)
 	}	
 	return new_arr;
 }
+
 
 /*
  *	Function: multiply
@@ -75,6 +77,7 @@ float** multiply(float** arr1, float** arr2, int rows1, int cols1, int rows2, in
 	}
 	return new_arr;
 }
+
 
 /*
  *	Function: gaussian_elimination
@@ -127,6 +130,7 @@ float* gaussian_elimination(float** arr, int rows, int cols)
 	return X;
 }
 
+
 /*
  *	Function: rref
  *	------------------------------
@@ -164,6 +168,7 @@ float** rref(float** arr, int rows, int cols)
 	return arr;
 }
 
+
 /*
  *	Function: trace
  *	------------------------------
@@ -178,6 +183,7 @@ int trace(float** arr, int rows, int cols)
 	}
 	return sum;
 }
+
 
 /*
  *	Function: transpose
@@ -197,6 +203,12 @@ float** transpose(float** arr, int rows)
 	return new_arr;
 }
 
+
+/*
+ *	Function: rank
+ *	------------------------------
+ *	Gets matrix as input from user, then calculates its rank
+ */
 int rank(float** arr1, int rows, int cols) 
 {    	
 
@@ -219,6 +231,12 @@ int rank(float** arr1, int rows, int cols)
 	return rank;
 }
 
+
+/*
+ *	Function: determinant
+ *	------------------------------
+ *	Gets matrix as input from user, then calculates its determinant
+ */
 float det(float** arr, int rows, int columns)
 {
 	float** minor = allocate_matrix(rows, columns);
@@ -253,7 +271,12 @@ float det(float** arr, int rows, int columns)
 }
 
 
-
+/*
+ *	Function: check_zero_row
+ *	------------------------------
+ *	Gets matrix, number of rows, and number of columns as parameters.
+ *	Checks for any completely zero rows, and swaps them to the bottom of the matrix
+ */
 int check_zero_row(float** arr, int rows, int columns) {
 	
 	int num = 0;
@@ -281,5 +304,3 @@ int check_zero_row(float** arr, int rows, int columns) {
 
 	return num;
 }
-
-

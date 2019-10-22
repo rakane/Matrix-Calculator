@@ -14,6 +14,7 @@ float* X;
 int rows1, columns1, rows2, columns2, num;
 float n;
 
+
 /*
  *	Function: add_driver
  *	------------------------------
@@ -31,6 +32,7 @@ void add_driver()
 	print_matrix(new_arr, rows1, columns1);
 }
 
+
 /*
  *	Function: subtract_driver
  *	------------------------------
@@ -47,6 +49,7 @@ void subtract_driver()
 	printf("-------------Solution-----------\n");
 	print_matrix(new_arr, rows1, columns1);
 }
+
 
 /*
  *	Function: multiply_driver
@@ -67,6 +70,7 @@ void multiply_driver()
 	print_matrix(new_arr, rows1, columns2);
 
 }
+
 
 /*
  *	Function: gaussian_elimination_driver
@@ -89,6 +93,7 @@ void gaussian_elimination_driver()
 	}
 }
 
+
 /*
  *	Function: rref_driver
  *	------------------------------
@@ -107,6 +112,7 @@ void rref_driver()
 	print_matrix(new_arr, rows1, columns1);
 }
 
+
 /*
  *	Function: trace_driver
  *	------------------------------
@@ -121,6 +127,7 @@ void trace_driver()
 	num = trace(arr1, rows1, columns1);
 	printf("\n\nTrace: %i\n", num);	
 }
+
 
 /*
  *	Function: transpose_driver
@@ -137,6 +144,7 @@ void transpose_driver() {
 		print_matrix(new_arr, rows1, rows1);
 }
 
+
 /*
  *	Function: rank_driver
  *	------------------------------
@@ -151,6 +159,13 @@ void rank_driver() {
 	printf("\n\nRank: %i\n\n", num);
 }
 
+
+/*
+*	Function: determinant_driver
+*	------------------------------
+*	Gets matrix as input from user, calls determinant function,
+*	and prints the determinant
+*/
 void det_driver() {
 	rows1 = get_rows(1);
 	columns1 = rows1;
@@ -158,7 +173,6 @@ void det_driver() {
 	n = det(arr1, rows1, columns1);
 	printf("\n\nDeterminant: %.2f\n\n", n);
 }
-
 
 
 /* Function: get_rows()
@@ -174,6 +188,7 @@ int get_rows(int num) {
 	return num_rows;
 }
 
+
 /* Function: get_columnss()
  * 	------------------------------
  * 	Gets number of columns for matrix num from user
@@ -186,6 +201,7 @@ int get_columns(int num) {
 	scanf("%i", &num_cols);
 	return num_cols;
 }
+
 
 /*
  *	Function: input_matrix
@@ -214,6 +230,7 @@ float** input_matrix(int rows, int columns, int num) {
 
 	return arr;
 }
+
 
 /*
  *	Function: allocate_matrix
