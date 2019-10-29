@@ -259,7 +259,6 @@ float** allocate_matrix(int rows, int columns) {
  *	arr: The matrix to be printed
  *	rows: number of rows in arr
  *	columns: number of columns in arr
- *
  */
 void print_matrix(float** arr, int rows, int columns) {
 	for(int i = 0; i < rows; i++) {
