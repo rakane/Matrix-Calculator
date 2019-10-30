@@ -1,18 +1,11 @@
-link: lib compile
-	gcc src/main.o -L. src/libmatrix.a src/libmatrixdriver.a -o calculator
-	gcc test/check_matrix.o -L. src/libmatrix.a src/libmatrixdriver.a -o check `pkg-config --cflags --libs check`
+test: lib compile
+	gcc test/check_matrix.o -L. libmatrix.a -o check `pkg-config --cflags --libs check`
 lib:
-	gcc -c src/matrix.c -o src/matrix.o
-	gcc -c src/matrixdriver.c -o src/matrixdriver.o
-	mv src/matrix.o src/libmatrix.a
-	mv src/matrixdriver.o src/libmatrixdriver.a
+	gcc -c matrix.c -o matrix.o
+	mv matrix.o libmatrix.a
 compile:
-	gcc -c src/main.c -o src/main.o
 	gcc -c test/check_matrix.c -o test/check_matrix.o
 clean:
-	rm src/libmatrix.a
-	rm src/libmatrixdriver.a
-	rm src/main.o
+	rm libmatrix.a
 	rm test/check_matrix.o
-	rm calculator
 	rm check

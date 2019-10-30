@@ -1,5 +1,5 @@
 #include <check.h>
-#include "../src/header.h"
+#include "../matrix.h"
 
 int compare_matrix(float**, float**, int, int);
 int compare_solutions(float*, float*, int);

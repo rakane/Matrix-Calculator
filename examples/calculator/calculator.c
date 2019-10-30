@@ -1,4 +1,4 @@
-#include "header.h"
+#include "calculator.h"
 
 int main(int argc, char* argv[]) {
  	int loop = 1;

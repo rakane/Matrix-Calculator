@@ -1,8 +1,6 @@
-calculator
+examples/calculator/calculator
 check
-src/libmatrixdriver.a
-src/libmatrix.a
-src/matrix.o
-src/matrixdriver.o
-src/main.o
+examples/calculator/libmatrixdriver.a
+examples/calculator/libmatrix.a
+matrix.o
 test/check_matrix.o

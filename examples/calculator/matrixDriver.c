@@ -7,7 +7,13 @@
  * and prints return solution
  */
 
-#include "header.h"
+#include "../../matrix.h"
+
+int get_rows(int);
+int get_columns(int);
+float** input_matrix(int, int, int);
+
+
 
 float** arr1, **arr2, **new_arr;
 float* X;
@@ -189,7 +195,7 @@ int get_rows(int num) {
 }
 
 
-/* Function: get_columnss()
+/* Function: get_columns()
  * 	------------------------------
  * 	Gets number of columns for matrix num from user
  *
@@ -232,44 +238,4 @@ float** input_matrix(int rows, int columns, int num) {
 }
 
 
-/*
- *	Function: allocate_matrix
- *	------------------------------
- *	Return an int** pointing to a correctly allocated matrix based on rows/columns
- *	
- *	rows: number of rows desired for the matrix
- *	columns: number of columns desired for the matrix
- *
- *	returns: An int** of size [rows][columns]
- */
-float** allocate_matrix(int rows, int columns) {
-	float ** arr = (float **) malloc(rows * sizeof(float *));
-	for(int i = 0; i < rows; i++) {
-		arr[i] = (float *) malloc(columns * sizeof(float));	
-	}
-	return arr;
-}
 
-
-/*
- *	Function: print_matrix
- *	----------------------------
- *	Print the matrix
- *
- *	arr: The matrix to be printed
- *	rows: number of rows in arr
- *	columns: number of columns in arr
- */
-void print_matrix(float** arr, int rows, int columns) {
-	for(int i = 0; i < rows; i++) {
-		for(int j = 0; j < columns; j++) {
-			if(arr[i][j] == 0 || arr[i][j] == -0) {
-				printf("%.2f  ", 0.0);
-			} else {
-				printf("%.2f  ", arr[i][j]);
-			}
-		}
-		printf("\n");
-	}
-	printf("\n");
-}

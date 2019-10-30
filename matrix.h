@@ -11,21 +11,7 @@ extern float** transpose(float**, int);
 extern int rank(float**, int, int);
 extern float det(float**, int, int);
 
-
-extern void add_driver();
-extern void subtract_driver();
-extern void multiply_driver();
-extern void gaussian_elimination_driver();
-extern void rref_driver();
-extern void trace_driver();
-extern void transpose_driver();
-extern void rank_driver();
-extern void det_driver();
-
-extern int get_rows();
-extern int get_columns();
 extern int check_zero_row(float**, int, int);
 extern void swap_row(float**, int, int, int);
-extern float** input_matrix(int, int, int);
 extern float** allocate_matrix(int, int);
 extern void print_matrix(float**, int, int);
