@@ -18,8 +18,19 @@
 1. Adjoint
 2. Inverse
 
-## To Run:
+## Setup
 1. Git clone or download this repo
-2. Make sure you have check (unit testing library) installed, use "sudo apt-get install check" if not
-3. cd into the top level directory, and run "make"
-4. Then run "./calculator" to run
+2. Make sure you have Check (unit testing library) installed in order to run test suite. Use "sudo apt-get install check".
+
+
+## To run calculator example:
+1. cd into examples/calculator and run 'make'
+2. run './calculator'
+
+## To run Test Suite
+1. In the root project directory run 'make test'
+2. Run ./check
+
+## To Integrate into your own project
+1. Include the "{$PATH/TO/ROOT/PROJECT/DIR}/matrix.h"
+2. Link the library to your project similarly to the Makefile in the calculator example
